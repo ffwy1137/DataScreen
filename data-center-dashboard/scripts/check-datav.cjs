@@ -1,0 +1,8 @@
+const p = require('@kjgl77/datav-vue3/package.json')
+console.log('main:', p.main)
+console.log('module:', p.module)
+console.log('exports:', JSON.stringify(p.exports))
+const pkg = require('@kjgl77/datav-vue3')
+console.log('keys:', Object.keys(pkg).slice(0, 20))
+console.log('has default:', !!pkg.default)
+console.log('has install:', typeof (pkg.default && pkg.default.install))
