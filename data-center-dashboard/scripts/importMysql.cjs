@@ -30,7 +30,8 @@ function parseDat(file) {
 
 async function batchInsert(pool, table, columns, rows, toValues) {
   if (!rows.length) return 0
-  const sql = `INSERT INTO ${table} (${columns.join(',')}) VALUES ?`
+  const escapedColumns = columns.map(c => `\`${c}\``).join(',')
+  const sql = `INSERT IGNORE INTO ${table} (${escapedColumns}) VALUES ?`
   const data = rows.map((r) => toValues(r))
   const [res] = await pool.query(sql, [data])
   return res.affectedRows
